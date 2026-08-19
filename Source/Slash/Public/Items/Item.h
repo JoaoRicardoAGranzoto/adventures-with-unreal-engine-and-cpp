@@ -21,4 +21,10 @@ protected:
 	
 	
 	virtual void BeginPlay() override;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Static")
+	UStaticMeshComponent* StaticMesh;
+	
+private:
+	float RunningTime;
 };

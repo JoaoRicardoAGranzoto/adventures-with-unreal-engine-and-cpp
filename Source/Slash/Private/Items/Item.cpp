@@ -5,26 +5,34 @@
 AItem::AItem()
 {
 	PrimaryActorTick.bCanEverTick = true;
+	
+	StaticMesh = CreateDefaultSubobject<UStaticMeshComponent>("StaticMesh");
+	RootComponent = StaticMesh;
 }
 
 void AItem::BeginPlay()
 {
 	Super::BeginPlay();
-	
-	UE_LOG(LogTemp, Warning, TEXT("AItem::BeginPlay()"));
 }
 
 void AItem::Tick(float DeltaTime)
+
+
+
+
 {
-	
-	
-	
-	
 	Super::Tick(DeltaTime);
 
+	RunningTime += DeltaTime;
+	
+	float DeltaZ = 0.25f * FMath::Sin(RunningTime * 5.f);
+	
+	AddActorLocalOffset(FVector(0.f, 0.f, DeltaZ));
+	AddActorLocalRotation(FRotator(0.f, DeltaZ, 0.f));
+	
 	if (GetWorld())
 	{
 		DrawDebugSphere(GetWorld(), GetActorLocation(), 100.f, 10, FColor::Red);
-		DrawDebugLine(GetWorld(), GetActorLocation(), GetActorForwardVector() * 1000.f, FColor::Red);
+		DrawDebugLine(GetWorld(), GetActorLocation(), GetActorLocation() + GetActorForwardVector() * 500.f, FColor::Red);
 	}
 }
