@@ -27,7 +27,7 @@ void AItem::Tick(float DeltaTime)
 	
 	float DeltaZ = 0.25f * FMath::Sin(RunningTime * 5.f);
 	
-	AddActorLocalOffset(FVector(0.f, 0.f, DeltaZ));
+	AddActorLocalOffset(FVector(GetActorLocation().X, GetActorLocation().Y, DeltaZ));
 	AddActorLocalRotation(FRotator(0.f, DeltaZ, 0.f));
 	
 	if (GetWorld())
